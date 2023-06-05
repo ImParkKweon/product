@@ -1,10 +1,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: jdbc-claim
-  namespace: jdbc
+  name: product-claim
+  namespace: product
+  finallizers: null
 spec:
-  storageClassName: jdbc-nfs-client
+  storageClassName: product-nfs-client
   accessModes:
     - ReadWriteMany
   resources:

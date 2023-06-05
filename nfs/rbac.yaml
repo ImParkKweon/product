@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: jdbc-nfs-client-provisioner
+  name: nfs-client-provisioner
   # replace with namespace where provisioner is deployed
-  namespace: jdbc
+  namespace: product
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: jdbc-nfs-client-provisioner-runner
+  name: nfs-client-provisioner-runner
+  namespace: product
 rules:
   - apiGroups: [""]
     resources: ["nodes"]
@@ -29,12 +30,12 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: jdbc-run-nfs-client-provisioner
+  name: run-nfs-client-provisioner
 subjects:
   - kind: ServiceAccount
     name: nfs-client-provisioner
     # replace with namespace where provisioner is deployed
-    namespace: jdbc
+    namespace: product
 roleRef:
   kind: ClusterRole
   name: nfs-client-provisioner-runner
@@ -45,7 +46,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: jdbc-leader-locking-nfs-client-provisioner
   # replace with namespace where provisioner is deployed
-  namespace: jdbc
+  namespace: product
 rules:
   - apiGroups: [""]
     resources: ["endpoints"]
@@ -54,14 +55,14 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: jdbc-leader-locking-nfs-client-provisioner
+  name: leader-locking-nfs-client-provisioner
   # replace with namespace where provisioner is deployed
-  namespace: jdbc
+  namespace: product
 subjects:
   - kind: ServiceAccount
     name: nfs-client-provisioner
     # replace with namespace where provisioner is deployed
-    namespace: jdbc
+    namespace: product
 roleRef:
   kind: Role
   name: leader-locking-nfs-client-provisioner

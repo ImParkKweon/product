@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nfs-client-provisioner
   # replace with namespace where provisioner is deployed
-  namespace: jdbc
+  namespace: product
 spec:
   replicas: 1
   strategy:
@@ -31,9 +31,9 @@ spec:
             - name: NFS_SERVER
               value: 192.168.0.5
             - name: NFS_PATH
-              value: /data/jdbc
+              value: /data/product
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.0.5
-            path: /data/jdbc
+            path: /data/product
