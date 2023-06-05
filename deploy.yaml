@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jdbc
+  namespace: jdbc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jdbc
+  template:
+    metadata:
+      labels:
+        app: jdbc
+    spec:
+      containers:
+      - name: mariadb
+        image: mysql:8.0.33
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: jdbc-pvc
+        env:
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: "yes"
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: jdbc-creds
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: jdbc-creds
+              key: password
+        - name: MYSQL_DATABASE
+          value: "jdbc"
+      volumes:
+        - name: jdbc-pvc
+          persistentVolumeClaim:
+            claimName: jdbc-claim
