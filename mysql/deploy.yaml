@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product
+  name: mysql
   namespace: product
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: product
+      app: mysql
   template:
     metadata:
       labels:
-        app: product
+        app: mysql
     spec:
       containers:
-      - name: mariadb
+      - name: mysql
         image: mysql:8.0.33
         ports:
         - containerPort: 8080
         volumeMounts:
             - mountPath: "/var/lib/mysql"
-              name: product-pvc
+              name: mysql-pvc
         env:
         - name: MYSQL_RANDOM_ROOT_PASSWORD
           value: "yes"
@@ -37,6 +37,6 @@ spec:
         - name: MYSQL_DATABASE
           value: "product"
       volumes:
-        - name: product-pvc
+        - name: mysql-pvc
           persistentVolumeClaim:
             claimName: product-claim
