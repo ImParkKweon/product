@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: capstone-nodeport
+  namespace: capstone
+spec:
+  type: NodePort
+  ports:
+  - port: 8080 #svc 조회했을때 clusterIP:Port  index.js에서 listening하는 포트
+    targetPort: 8080 #endpoints(컨테이너IP:Port)
+    nodePort: 30003 #외부 IP에서 접근할 포트
+  selector:
+    app: frontend
+
+
