@@ -1,3 +1,3 @@
 frontend_src
 
-./metallb/ipaddrpool.yaml
+metallb/ipaddrpool.yaml
