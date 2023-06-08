@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deploy
+  namespace: product
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: hyunjun1325/backend:0.1
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DB_URL
+            value: product-mysql-service.product.svc.cluster.local
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: product-creds
+                key: username
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: product-creds
+                key: password
+          - name: MYSQL_DATABASE
+            value: "test_DB"
+        # command: ["/bin/bash","-ec", "while :; do sleep 5; done"]
+        command: ["/bin/bash", "node", "main.js"]
+
