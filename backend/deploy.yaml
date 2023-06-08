@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: hyunjun1325/backend:0.05
+        image: hyunjun1325/backend:0.06
         ports:
         - containerPort: 8080
         env:
