@@ -32,7 +32,7 @@ spec:
                 name: product-creds
                 key: password
           - name: MYSQL_DATABASE
-            value: "test_DB"
+            value: "product"
         command: ["/bin/bash","-ec", "while :; do sleep 5; done"]
         # command: ["/bin/bash","-ec", "node", "main.js"]
 
