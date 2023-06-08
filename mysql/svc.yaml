@@ -4,7 +4,6 @@ metadata:
   name: product-mysql-service
   namespace: product
 spec:
-  type: Service
   selector:
     app: mysql
   ports:
