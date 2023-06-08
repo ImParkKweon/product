@@ -34,5 +34,5 @@ spec:
           - name: MYSQL_DATABASE
             value: "test_DB"
         # command: ["/bin/bash","-ec", "while :; do sleep 5; done"]
-        command: ["/bin/bash", "node", "main.js"]
+        # command: ["/bin/bash","-ec", "node", "main.js"]
 
