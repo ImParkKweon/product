@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: hyunjun1325/frontend:66
+        image: hyunjun1325/frontend:67
         ports:
         - containerPort: 8080
 
