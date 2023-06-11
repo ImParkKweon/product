@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+  namespace: product
+spec:
+  ports:
+  - port: 8080 #svc 조회했을때 clusterIP:Port  index.js에서 listening하는 포트
+    targetPort: 8080 #endpoints(컨테이너IP:Port)
+  selector:
+    app: backend
