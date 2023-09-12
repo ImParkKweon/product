@@ -21,10 +21,11 @@ metadata:
   annotations:
    metallb.universe.tf/address-pool: 
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
   - port: 8080 #svc 조회했을때 clusterIP:Port  index.js에서 listening하는 포트
     targetPort: 8080 #endpoints(컨테이너IP:Port)
+    nodePort: 9009
   selector:
     app: frontend
 
